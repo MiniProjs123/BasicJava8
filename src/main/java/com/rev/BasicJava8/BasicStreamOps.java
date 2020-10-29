@@ -79,7 +79,7 @@ public class BasicStreamOps {
     	List<String> figures = Arrays.asList("888", "999", "555", "777", "222", "444");
     	figures.forEach(p -> {
     		System.out.print("!!!!!" + p);
-    		System.out.println("\n");
+    		System.out.println("....multiple lines of code..\n");
     	});
 		
 		System.out.println("==> for eaching [end]\n");
@@ -93,6 +93,7 @@ public class BasicStreamOps {
 	// convert elements from char to Integer, for example
     // map sheep names to a list of strings
     // create map from list of objects
+	// convert char digit to int with Character.getNumericValue(ch)
 	private static void doSomeMapping() {
 		System.out.println("==> filtering [start]\n");
 		
@@ -111,7 +112,8 @@ public class BasicStreamOps {
 		Map<String, Sheep> nameToSheepMap = 
 				sheepCollection.stream().collect(Collectors.toMap(s->s.getName(), s->s));
 		
-		List<Integer> intList = Stream.of('1', '2', '3').map(ch -> Integer.parseInt(ch.toString())).collect(Collectors.toList());
+		
+		List<Integer> intList = Stream.of('1', '2', '3').map(ch -> Character.getNumericValue(ch)).collect(Collectors.toList());
 		System.out.print("\nCheeky conversion from chars to ints = ");
 		intList.forEach(a -> System.out.print(", " + a));
 		
@@ -134,7 +136,6 @@ public class BasicStreamOps {
     	
     	long distinctVals = intList.stream().mapToInt(q -> q).distinct().count();
     	System.out.println("\ndistinct ints = " + distinctVals);
-    	
     	
     	List<Sheep> sheep = List.of(new Sheep(1, "black", "fine", "Mildy", 44), new Sheep(8, "blue", "steely", "Gertrude", 48),
 				new Sheep(2, "white", "curly", "Tolly", 42), new Sheep(3, "blue", "straight", "Savvy", 46)); 
@@ -202,8 +203,8 @@ public class BasicStreamOps {
 				  Arrays.asList(3, 4), 
 				  Arrays.asList(5)
 				);
-		Stream<Integer> integerStream = integerListStream.flatMap(Collection::stream);
-		integerStream.forEach(n->System.out.print(" " + n));
+		Stream<Integer> consolidatedStream = integerListStream.flatMap(Collection::stream);
+		consolidatedStream.forEach(n->System.out.print(" " + n));
     	
     	System.out.println("==> flat mapping [end]\n");
     }
