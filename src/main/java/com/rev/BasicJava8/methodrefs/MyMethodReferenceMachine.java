@@ -76,7 +76,6 @@ public class MyMethodReferenceMachine {
 		result = adder2.apply(100, 200);  
 		System.out.println("Refer to Calculator add() method using a lambda instead of a method reference = " + result);
 		
-		
 		// wierd how you can assign a (static or instance) reference to a completely unrelated functional interface / pre-defined functional interface
 		// just the signature and return type matter
 		Tellable teller = MyMethodReference::saySomethingStatic;

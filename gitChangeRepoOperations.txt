@@ -1,0 +1,113 @@
+Put me in GitHub:    paul.home4748@gmail.com   (and not in normal work github account)
+
+https://medium.com/@ibrahimlawal/developing-with-multiple-github-accounts-on-one-macbook-94ff6d4ab9ca
+
+
+paul.bickell@raytheon.co.uk
+TRT-PaulB
+
+paul.home4748@gmail.com
+MiniProjs123
+
+
+NOTE MAC FINDER HIDDEN FILES ==> CMD + SHIFT + .
+
+
+
+// generate SSH keys for all accounts
+cd ~/.ssh
+ssh-keygen -t rsa -C "paul.bickell@raytheon.co.uk" -f "github-TRT-PaulB"
+ssh-keygen -t rsa -C "paul.home4748@gmail.com" -f "github-MiniProjs123"
+ssh-keygen -t rsa -C "paul.home47@gmail.com" -f "github-BasicStore"
+ssh-keygen -t rsa -C "home.paul47@gmail.com" -f "github-zzzGithubAccount"
+
+
+// add SSH keys to ssh agent
+ssh-add -K ~/.ssh/github-TRT-PaulB
+ssh-add -K ~/.ssh/github-MiniProjs123
+ssh-add -K ~/.ssh/github-BasicStore
+ssh-add -K ~/.ssh/github-zzzGithubAccount
+
+
+// copy public SHH keys and paste in github
+pbcopy < ~/.ssh/github-TRT-PaulB.pub
+pbcopy < ~/.ssh/github-MiniProjs123.pub
+pbcopy < ~/.ssh/github-BasicStore.pub
+pbcopy < ~/.ssh/github-zzzGithubAccount.pub
+
+
+// update config file in .ssh directory
+# TRT-PaulB account
+Host github.com-TRT-PaulB
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/github-TRT-PaulB
+    
+# MiniProjs123 account
+Host github.com-MiniProjs123
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/github-MiniProjs123
+
+# BasicStore account
+Host github.com-BasicStore
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/github-BasicStore
+
+# zzzGithubAccount account
+Host github.com-zzzGithubAccount
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/github-zzzGithubAccount
+    
+    
+// set one account to be default    
+git config --global user.name "TRT-PaulB"
+git config --global user.email "paul.bickell@raytheon.co.uk"   
+
+
+// now run the pair of repo details as needed for this time, eith / or....
+// do this IN EVERY REPOSITORY to tell git which account to use 
+git config user.email "paul.bickell@raytheon.co.uk"
+git config user.name "TRT-PaulB"
+
+git config user.email "paul.home4748@gmail.com"
+git config user.name "MiniProjs123"
+
+git config user.email "paul.home47@gmail.com"
+git config user.name "BasicStore"
+
+git config user.email "home.paul47@gmail.com"
+git config user.name "zzzGithubAccount"
+
+
+// Permission error?
+   ==> Go to Finder/Utilities/KeyChain --> search for git
+   ==> delete the web based security certificates,
+       then on next git transfer operation you will have to supply github username / password
+
+
+//////////////////////////////////////////////////////
+***** PULL FROM ORIGIN, PUSH SOMEWHERE ELSE ******
+
+//  pull down some code (in this case some other)
+git clone git@github.com:MiniProjs123/BasicAccountWebapp.git
+
+      ==> but could have done something like this:
+          git clone git@github.com-MiniProjs123:MiniProjs123/BasicAccountWebapp.git
+
+// change user (back to the default/global TRT-PaulB ) and push to another repository
+git config user.email "paul.bickell@raytheon.co.uk"
+git config user.name "TRT-PaulB"
+git remote set-url origin git@github.com-TRT-PaulB:TRT-PaulB/BasicAccountWebappCopy.git
+
+//////////////////////////////////////////////////////
+
+
+NOTE: it seems to break when eclipse forces you to 'copy' project directory
+      from source and then import it into your workspace.....
+
+
+git remote set-url origin git@github.com-BasicStore:BasicStore/RP2.git
+
