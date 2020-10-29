@@ -3,13 +3,6 @@ Put me in GitHub:    paul.home4748@gmail.com   (and not in normal work github ac
 https://medium.com/@ibrahimlawal/developing-with-multiple-github-accounts-on-one-macbook-94ff6d4ab9ca
 
 
-paul.bickell@raytheon.co.uk
-TRT-PaulB
-
-paul.home4748@gmail.com
-MiniProjs123
-
-
 NOTE MAC FINDER HIDDEN FILES ==> CMD + SHIFT + .
 
 
@@ -104,10 +97,17 @@ git remote set-url origin git@github.com-TRT-PaulB:TRT-PaulB/BasicAccountWebappC
 
 //////////////////////////////////////////////////////
 
-
 NOTE: it seems to break when eclipse forces you to 'copy' project directory
       from source and then import it into your workspace.....
 
 
-git remote set-url origin git@github.com-BasicStore:BasicStore/RP2.git
+===> if git communication fails:
+     --> 1) obviously make sure the git user name and email are correct in repository
+     --> 2) try removing the webpage certificate keys
+     --> 3) git remote set-url origin git@github.com-MiniProjs123:MiniProjs123/MicroBasics1-5.git
+            --> then push again 
+     --> 4) replace key and try step 2 again
+
+//////////////////////////////////////////////////////
+
 
