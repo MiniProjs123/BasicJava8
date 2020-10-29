@@ -79,7 +79,6 @@ public class CopyByValue {
 		// after the swap method exits the stack, the original referenced memory locations for both objects are used
 		// so no change
 		swap(mildy, gertrude);
-				
 		System.out.println("Mildy is still Mildy ="+mildy.getName());
 		System.out.println("Gertrude is still Gertrude ="+gertrude.getName());
 		
@@ -126,7 +125,10 @@ public class CopyByValue {
 		if (a == b && a != c) {
 			System.out.println("\n\nJava Strings are implemented using the flyweight pattern to save on resources - "
 					+ "a and b are the same object.\nIdentical strings are the very same object, but a slightly different one is not");
+		} else {
+			throw new NullPointerException("Flyweight problems");
 		}
+		
 	}
 	
 	

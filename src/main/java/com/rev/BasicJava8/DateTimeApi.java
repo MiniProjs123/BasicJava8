@@ -1,11 +1,13 @@
 package com.rev.BasicJava8;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 
 public class DateTimeApi {
 
@@ -47,9 +49,33 @@ public class DateTimeApi {
     	
     	LocalDateTime specificTime = LocalDateTime.of(1987, 8, 21, 18, 30, 12);
     	System.out.println("Specific time: " + trustyFormatter.format(specificTime));
+    	    	
+    	Date someDate = new Date(120, 9, 29);
+    	LocalDate dateInDefaultZone = convertToLocalDateViaInstant(someDate);
+    	LocalDate dateInBerlin = convertToLocalDateViaMilisecond(someDate);
+    	LocalDate dateViaSql = convertToLocalDateViaSqlDate(someDate); 
+    	System.out.println("Old util.Date converted to LocalDate in default zone: " + miniFormatter.format(dateInDefaultZone));
+    	System.out.println("Old util.Date converted to LocalDate in Berlin: " + miniFormatter.format(dateInBerlin));
+    	System.out.println("Old util.Date converted to LocalDate via old sql (zone of db server): " + miniFormatter.format(dateViaSql));
 	}
 	
 
+	public LocalDate convertToLocalDateViaInstant(Date dateToConvert) {
+	    return dateToConvert.toInstant()
+	      .atZone(ZoneId.systemDefault())
+	      .toLocalDate();
+	}
 	
+	
+	public LocalDate convertToLocalDateViaMilisecond(Date dateToConvert) {
+	    return Instant.ofEpochMilli(dateToConvert.getTime())
+	      .atZone(ZoneId.of("Europe/Berlin"))
+	      .toLocalDate();
+	}
+	
+	
+	public LocalDate convertToLocalDateViaSqlDate(Date dateToConvert) {
+	    return new java.sql.Date(dateToConvert.getTime()).toLocalDate();
+	}
 	
 }
