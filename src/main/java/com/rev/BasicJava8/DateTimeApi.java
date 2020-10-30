@@ -50,6 +50,7 @@ public class DateTimeApi {
     	LocalDateTime specificTime = LocalDateTime.of(1987, 8, 21, 18, 30, 12);
     	System.out.println("Specific time: " + trustyFormatter.format(specificTime));
     	    	
+    	// conversion from old java.util.Date and java.sql.Date to LocalDate
     	Date someDate = new Date(120, 9, 29);
     	LocalDate dateInDefaultZone = convertToLocalDateViaInstant(someDate);
     	LocalDate dateInBerlin = convertToLocalDateViaMilisecond(someDate);
